@@ -1,0 +1,59 @@
+<log4r_config>
+  <pre_config>
+    <global level="DEBUG"/>
+    <parameter name="log_pattern" value="[%5.5l] [%d] [%g] %m"/>
+  </pre_config>
+
+  <outputter name="env_file_log" type="RollingFileOutputter" maxsize="100MB" level="DEBUG" filename="#{RAILS_ROOT}/log/#{RAILS_ENV}.log" trunc="false" maxBackupIndex="2">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+  
+  <outputter name="console" type="StdoutOutputter" level="DEBUG">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+    
+  <outputter name="syslog" type="SyslogOutputter" level="DEBUG" facility="LOG_LOCAL0" ident="rails">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%g] %m"/>  <!-- syslog already has datetime, so dont need in message format -->
+  </outputter> 
+  
+  <logger name="development" level="DEBUG" outputters="env_file_log"/>
+  <logger name="test"        level="DEBUG" outputters="env_file_log"/>
+  <logger name="production"  level="DEBUG" outputters="env_file_log,syslog"/> 
+  
+  <!-- db -->
+  <outputter name="db_env_file_log" type="RollingFileOutputter" maxsize="100MB" level="DEBUG" filename="#{RAILS_ROOT}/log/#{RAILS_ENV}_database.log" trunc="false" maxBackupIndex="2">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+  
+  <logger name="development_db" level="DEBUG" outputters="db_env_file_log"/>
+  <logger name="test_db"        level="DEBUG" outputters="db_env_file_log"/>
+  <logger name="production_db"  level="ERROR" outputters="db_env_file_log"/> 
+  
+  <!-- ares -->
+  <outputter name="ares_env_file_log" type="FileOutputter" level="DEBUG" filename="#{RAILS_ROOT}/log/#{RAILS_ENV}_ares.log" trunc="false" >
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+  
+  <logger name="development_ares" level="DEBUG" outputters="ares_env_file_log"/>
+  <logger name="test_ares"        level="DEBUG" outputters="ares_env_file_log"/>
+  <logger name="production_ares"  level="ERROR" outputters="ares_env_file_log"/> 
+  
+  <!-- mailer -->
+  <outputter name="mailer_env_file_log" type="RollingFileOutputter" maxsize="100MB" level="DEBUG" filename="#{RAILS_ROOT}/log/#{RAILS_ENV}_mailer.log" trunc="false" maxBackupIndex="2">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+  
+  <logger name="development_mailer" level="DEBUG" outputters="mailer_env_file_log"/>
+  <logger name="test_mailer"        level="DEBUG" outputters="mailer_env_file_log"/>
+  <logger name="production_mailer"  level="ERROR" outputters="mailer_env_file_log"/> 
+  
+  <!-- metrics -->
+  <outputter name="metrics_env_file_log" type="RollingFileOutputter" maxsize="100MB" level="DEBUG" filename="#{RAILS_ROOT}/log/#{RAILS_ENV}_metrics.log" trunc="false" maxBackupIndex="2">
+    <formatter type="PatternFormatter" pattern="[%5.5l] [%d] [%g] %m"/>
+  </outputter>
+  
+  <logger name="development_metrics" level="DEBUG" outputters="metrics_env_file_log"/>
+  <logger name="test_metrics"        level="DEBUG" outputters="metrics_env_file_log"/>
+  <logger name="production_metrics"  level="INFO" outputters="metrics_env_file_log"/> 
+  
+</log4r_config> 
