@@ -4,7 +4,7 @@ require 'rubygems/specification'
 require 'date'
 
 GEM = "log4r"
-GEM_VERSION = "1.3.0"
+GEM_VERSION = "2.0.0"
 AUTHOR = "Revolution Health"
 EMAIL = "rails-trunk@revolutionhealth.com"
 HOMEPAGE = %q{http://github.com/revolutionhealth/log4r/tree/master}
