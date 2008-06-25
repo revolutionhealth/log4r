@@ -35,7 +35,7 @@ class Log4rTest < Test::Unit::TestCase
   def test_ndc
     Log4r::Logger::NDC.push('something')
     assert_equal('something', Log4r::Logger::NDC.peek)
-    Thread.new {
+    t = Thread.new {
       Log4r::Logger::NDC.push('another thread')
       assert_equal('another thread', Log4r::Logger::NDC.peek)
       Log4r::Logger::NDC.push('block') {
@@ -50,6 +50,7 @@ class Log4rTest < Test::Unit::TestCase
     assert_equal('something', Log4r::Logger::NDC.peek)
     Log4r::Logger::NDC.pop
     assert_nil Log4r::Logger::NDC.peek
+    t.join
   end
   
   def test_roller
