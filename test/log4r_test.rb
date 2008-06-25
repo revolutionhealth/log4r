@@ -32,6 +32,26 @@ class Log4rTest < Test::Unit::TestCase
     assert_not_nil Log4r::Logger.GDC
   end
   
+  def test_ndc
+    Log4r::Logger::NDC.push('something')
+    assert_equal('something', Log4r::Logger::NDC.peek)
+    Thread.new {
+      Log4r::Logger::NDC.push('another thread')
+      assert_equal('another thread', Log4r::Logger::NDC.peek)
+      Log4r::Logger::NDC.push('block') {
+        assert_equal('block', Log4r::Logger::NDC.peek)
+      }
+      assert_equal('another thread', Log4r::Logger::NDC.peek)
+    }
+    assert_equal('something', Log4r::Logger::NDC.peek)
+    Log4r::Logger::NDC.push('blah') {
+      assert_equal('blah', Log4r::Logger::NDC.peek)
+    }
+    assert_equal('something', Log4r::Logger::NDC.peek)
+    Log4r::Logger::NDC.pop
+    assert_nil Log4r::Logger::NDC.peek
+  end
+  
   def test_roller
     sizeLog = Logger.new 'WbExplorer'
     rolling_appender = RollingFileOutputter.new("WbExplorer", { "filename" => file_path("TestSize.log"), "maxsize" => 16000, "trunc" => true })
