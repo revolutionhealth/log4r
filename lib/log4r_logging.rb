@@ -7,7 +7,7 @@ if defined?(ConfigurationLoader)
 elsif File.exists?(File.join(RAILS_ROOT, 'config', 'log4r.xml'))
   Log4r::Configurator.load_xml_file(File.join(RAILS_ROOT, 'config', 'log4r.xml'))
 else
-  Log4r::Configurator.load_xml_file(File.join(File.dirname(__FILE__), '..', '..', 'config', 'log4r.xml'))
+  Log4r::Configurator.load_xml_file(File.join(File.dirname(__FILE__), '..', 'config', 'log4r.xml'))
 end
   
 silence_warnings {
