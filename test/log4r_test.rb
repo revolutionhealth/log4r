@@ -25,8 +25,12 @@ module Log4r
 end
 
 
-class TestLog4r < Test::Unit::TestCase
+class Log4rTest < Test::Unit::TestCase
   include Log4r
+  
+  def test_gdc
+    assert_not_nil Log4r::Logger.GDC
+  end
   
   def test_roller
     sizeLog = Logger.new 'WbExplorer'

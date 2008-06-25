@@ -20,10 +20,10 @@ module Log4r
   Log4rVersion = [1, 0, 2].join '.'
 end
 
-#if defined?(Rails)
+if defined?(Rails)
+  if Rails::VERSION::MAJOR < 2
+    require 'rails_patch_for_migrations'
+  end
 
-if Rails::VERSION::MAJOR < 2
-  require 'rails_patch_for_migrations'
+  require 'log4r_logging'
 end
-
-require 'log4r_logging'
