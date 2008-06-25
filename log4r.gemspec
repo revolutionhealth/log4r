@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
   s.name = %q{log4r}
-  s.version = "1.3.0"
+  s.version = "2.0.0"
 
   s.specification_version = 2 if s.respond_to? :specification_version=
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Revolution Health"]
   s.autorequire = %q{log4r}
-  s.date = %q{2008-06-23}
+  s.date = %q{2008-06-25}
   s.description = %q{Updated version of Log4r}
   s.email = %q{rails-trunk@revolutionhealth.com}
   s.extra_rdoc_files = ["README", "LICENSE", "TODO"]
