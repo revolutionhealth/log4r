@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rubygems/specification'
 require 'date'
+require 'fileutils'
 
 GEM = "log4r"
 GEM_VERSION = "2.0.0"
@@ -49,6 +50,8 @@ end
 require 'test/unit'
  
 task :test do
+ FileUtils.mkdir(File.join(File.dirname(__FILE__), %w[log])) if !File.exists?(File.join(File.dirname(__FILE__), %w[log]))
+ FileUtils.rm(Dir.glob(File.join(File.dirname(__FILE__), %w[log *])))
  runner = Test::Unit::AutoRunner.new(true)
  runner.to_run << 'test'
  runner.pattern = [/_test.rb$/]
