@@ -17,7 +17,7 @@ require "log4r/loggerfactory"
 require "test/log_sql_per_test.rb"
 
 module Log4r
-  Log4rVersion = [1, 0, 2].join '.'
+  Log4rVersion = [2, 0, 0].join '.'
 end
 
 if defined?(Rails)
